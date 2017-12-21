@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using RestApies.ViewModel;
 using RestApies.Models.Database;
+using System.Web;
 
 namespace RestApies.Controllers
 {
@@ -39,9 +40,9 @@ namespace RestApies.Controllers
             List<RestaurantMenuEntity> userData = new List<RestaurantMenuEntity>();
             try
             {
-                if (_SubCategory == null)
+                if ( string.IsNullOrEmpty(_SubCategory.category))
                 {
-                    response = Request.CreateResponse(HttpStatusCode.PreconditionFailed, "UserID can not be zero!");
+                    response = Request.CreateResponse(HttpStatusCode.PreconditionFailed, "Category can not be zero or null!");
                 }
                 else
                 {
@@ -55,6 +56,55 @@ namespace RestApies.Controllers
             }
             return response;
         }
+
+        public HttpResponseMessage ItemDetail(ItemDetail _SubCategory)
+        {
+            HttpResponseMessage response;
+            List<RestaurantMenuEntity> userData = new List<RestaurantMenuEntity>();
+            try
+            {
+                if (string.IsNullOrEmpty(_SubCategory.subcategory))
+                {
+                    response = Request.CreateResponse(HttpStatusCode.PreconditionFailed, "Sub Category can not be zero or null!");
+                }
+                else
+                {
+                    userData = RestaurantMenuProcCall.RestaurantMenuItemDetail(_SubCategory);
+                    response = Request.CreateResponse(HttpStatusCode.OK, userData);
+                }
+            }
+            catch (Exception)
+            {
+                response = Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+            return response;
+        }
+
+
+        public HttpResponseMessage ItemList(RestaurantMenuEntity _SubCategory)
+        {
+            HttpResponseMessage response;
+            List<RestaurantMenuEntity> userData = new List<RestaurantMenuEntity>();
+            try
+            {
+                if (_SubCategory == null)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.PreconditionFailed, "id can not be zero or null!");
+                }
+                else
+                {
+                    userData = RestaurantMenuProcCall.RestaurantMenuItemList(_SubCategory);
+                    response = Request.CreateResponse(HttpStatusCode.OK, userData);
+                }
+            }
+            catch (Exception)
+            {
+                response = Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+            return response;
+        }
+     
+        
         // GET api/restaurantmenu
         //public IEnumerable<string> Get()
         //{

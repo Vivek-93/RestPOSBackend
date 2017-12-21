@@ -19,11 +19,16 @@ namespace RestApies.ViewModel
         public string available { get; set; }
         public string category { get; set; }
         public string mealtype { get; set; }
-
+        public string image_name { get; set; }
+        public string image_path { get; set; }
     }
 
     public class subMenuModel
     {
         public string category { get; set; }
+    }
+    public class ItemDetail
+    {
+        public string subcategory { get; set; }
     }
 }
