@@ -36,7 +36,7 @@ namespace RestApies.ViewModel
         public int phonenumber { get; set; }
         public string bookitems { get; set; }
         public int quantity { get; set; }
-        public string prince { get; set; }
+        public string price { get; set; }
     }
 
     public class TableModel
@@ -52,4 +52,11 @@ namespace RestApies.ViewModel
         public int phonenumber { get; set; }
     }
 
+    public class bookOrder
+    {
+        public int tablenumber { get; set; }
+        public string bookitems { get; set; }
+        public int quantity { get; set; }
+        public string price { get; set; }
+    }
 }

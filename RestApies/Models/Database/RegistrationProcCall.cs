@@ -145,5 +145,29 @@ namespace RestApies.Models.Database
             }
             return _ListingEntity;
         }
+
+        public static int usp_user_restaurantBookedOrder(bookOrder _Bookorder)
+        {
+            int userid = 0;
+            using (var connection = SQLConnection.GetOpenSQLConnection())
+            {
+                string sqlQuery = "usp_user_restaurantBookedOrder  @tablenumber,@bookitems,@quantity,@price";
+                userid = connection.Query<int>(sqlQuery, new { tablenumber = _Bookorder.tablenumber, bookitems = _Bookorder.bookitems, quantity = _Bookorder.quantity, price = _Bookorder.price }).FirstOrDefault();
+            }
+            return userid;
+        }
+
+        public static List<RestaurantEntity> usp_user_restaurantBookedOrderDetail(RestaurantEntity _Table)
+        {
+
+            List<RestaurantEntity> _UserEntity = new List<RestaurantEntity>();
+            using (var connection = SQLConnection.GetOpenSQLConnection())
+            {
+                string sqlQuery = "usp_user_restaurantBookedOrderDetail @tablenumber";
+                _UserEntity = connection.Query<RestaurantEntity>(sqlQuery, new { tablenumber = _Table.tablenumber }).ToList<RestaurantEntity>();
+            }
+            return _UserEntity;
+        }
+
     }
 }
