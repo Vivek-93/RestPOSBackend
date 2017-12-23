@@ -59,4 +59,10 @@ namespace RestApies.ViewModel
         public int quantity { get; set; }
         public string price { get; set; }
     }
+
+    public class RestaurantquantityUpdate
+    {
+        public int id { get; set; }
+        public int quantity { get; set; }
+    }
 }

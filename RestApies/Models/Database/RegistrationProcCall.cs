@@ -169,5 +169,34 @@ namespace RestApies.Models.Database
             return _UserEntity;
         }
 
+        public static RestaurantEntity usp_user_restaurantquantityUpdate(RestaurantquantityUpdate _Update)
+        {
+            RestaurantEntity _ListEntity = new RestaurantEntity();
+            using (var connection = SQLConnection.GetOpenSQLConnection())
+            {
+              //  string sqlQuery = "usp_user_restaurantquantityUpdate @id,@quantity";
+              //  _ListEntity = connection.Query<RestaurantEntity>(sqlQuery, new { id = _Update.id, quantity = _Update.quantity, }).FirstOrDefault();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "usp_user_restaurantquantityUpdate";
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = _Update.id;
+                cmd.Parameters.Add("@quantity", SqlDbType.VarChar).Value = _Update.quantity;
+               // cmd.Parameters.Add("@name", SqlDbType.VarChar).Value = _Update.name;
+             //   cmd.Parameters.Add("@contactnumber", SqlDbType.Int).Value = _Update.contactnumber;
+               // cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = _Update.email;
+                //cmd.Parameters.Add("@password", SqlDbType.VarChar).Value = _Update.password;
+                //cmd.Parameters.Add("@fathername", SqlDbType.VarChar).Value = _Update.fathername;
+                //cmd.Parameters.Add("@addharnumber", SqlDbType.Int).Value = _Update.addharnumber;
+                //cmd.Parameters.Add("@pannumber", SqlDbType.VarChar).Value = _Update.pannumber;
+                //cmd.Parameters.Add("@selectRole", SqlDbType.VarChar).Value = _Update.selectRole;
+
+                cmd.Connection = connection;
+                _ListEntity = (RestaurantEntity)cmd.ExecuteScalar();
+
+            }
+            return _ListEntity;
+        }
+
     }
 }

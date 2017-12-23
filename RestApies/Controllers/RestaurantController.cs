@@ -131,6 +131,31 @@ namespace RestApies.Controllers
             }
             return response;
         }
+
+
+
+        public HttpResponseMessage QuantityUpdate(RestaurantquantityUpdate _Update)
+        {
+            HttpResponseMessage response;
+            RestaurantEntity userData = new RestaurantEntity();
+            try
+            {
+                if (_Update == null)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.PreconditionFailed, "Update can not be null!");
+                }
+                else
+                {
+                    userData = RegistrationProcCall.usp_user_restaurantquantityUpdate(_Update);
+                    response = Request.CreateResponse(HttpStatusCode.OK, userData);
+                }
+            }
+            catch (Exception)
+            {
+                response = Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+            return response;
+        }
         // GET api/restaurant
         //public IEnumerable<string> Get()
         //{
